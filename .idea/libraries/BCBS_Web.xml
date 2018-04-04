@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="BCBS_Web">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../BCBS_Web" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../BCBS_Web/src" />
+      <root url="file://$PROJECT_DIR$/../BCBS_Web" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../BCBS_Web" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../BCBS_Web" recursive="false" type="SOURCES" />
+  </library>
+</component>
