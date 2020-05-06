@@ -1,0 +1,1283 @@
+<WF_DynamicForm>
+    <DataClass>Employee</DataClass>
+    <ValidationRule Type="NormalHoursGreaterThanZero" Event="OnSubmit"/>
+    <ValidationRule Type="EmergencyContactMustHaveRelationshipTypeRule" Event="OnSubmit"/>
+    <ValidationRule Type="NoEmailForWelcomeMessageValidationRule" Event="OnSubmit"/>
+    <ValidationRule Type="PreStartDateGreaterThanHireDateValidationRule" Event="OnSubmit"/>
+    <ValidationRule Type="BirthDateGreaterThanPreStartDateValidationRule" Event="OnSubmit"/>
+    <ValidationRule Type="EmployeeLoginIdMustBeUniqueRule" Event="OnSubmit"/>
+    <ValidationRule Type="EmployeeNumberMustBeUniqueRule" Event="OnSubmit"/>
+    <ValidationRule Type="EmployeePhoneNumberValidationRule" Event="OnSubmit"/>
+    <ValidationRule Type="EmployeeRateAndSalaryGreaterThanJobPayGradeRule" Event="OnSubmit"/>
+    <ValidationRule Type="EmployeeRateGreaterThanMinimumWageRule" Event="OnSubmit"/>
+    <ValidationRule Type="EmployeeZipCodeValidationRule" Event="OnSubmit"/>
+    <ValidationRule Type="SocialSecurityNumberValueRequiredValidationRule" Event="OnSubmit"/>
+    <ValidationRule Type="SocialSecurityNumberDuplicateRule" Event="OnSubmit"/>
+    <ValidationRule Type="SocialSecurityNumberAndExpiryDateValidationRule" Event="OnSubmit"/>
+    <ValidationRule Type="CountyRequiredForPrimaryAddressRule" Event="OnSubmit"/>
+    <ValidationRule Type="EmployeeRateIsRequired" Event="OnSubmit"/>
+    <ValidationRule Event="OnSubmit" Type="EmployeeOnboardingPolicyRule"/>
+    <PreSaveProcess Type="DefaultNewHireXMLPreSaveProcess"/>
+    <FormHeader>
+        <Style>header</Style>
+        <Title>lblNewHire</Title>
+    </FormHeader>
+    <!-- Used Class for Onboarding Policy-->
+    <UsedClass>
+        <Name>List_EmployeeOnboardingPolicy</Name>
+        <Mode>None</Mode>
+        <DefaultStatus>Insert</DefaultStatus>
+    </UsedClass>
+    <!-- Used Class for Person Address -->
+    <UsedClass>
+        <Name>List_PersonAddress</Name>
+        <Mode>AllKeyValues</Mode>
+        <LoadCriteria>PrimaryResidence</LoadCriteria>
+        <AddNewInstanceIfEmpty>true</AddNewInstanceIfEmpty>
+    </UsedClass>
+    <UsedClass>
+        <Name>List_EmployeeEmploymentStatus</Name>
+        <Mode>Current</Mode>
+        <AddNewInstanceIfEmpty>true</AddNewInstanceIfEmpty>
+        <DefaultStatus>Insert</DefaultStatus>
+    </UsedClass>
+    <!-- Used Class for EmployeeEmploymentPreStartStatus -->
+    <UsedClass>
+        <Name>List_EmployeeEmploymentPrestartStatus</Name>
+        <Mode>Current</Mode>
+        <AddNewInstanceIfEmpty>true</AddNewInstanceIfEmpty>
+        <DefaultStatus>Insert</DefaultStatus>
+    </UsedClass>
+    <!-- Used Class for Employee Work Assignment -->
+    <UsedClass>
+        <Name>List_EmployeeWorkAssignment</Name>
+        <Mode>Current</Mode>
+        <AddNewInstanceIfEmpty>true</AddNewInstanceIfEmpty>
+        <DefaultStatus>Insert</DefaultStatus>
+    </UsedClass>
+    <!-- EMPLOYEE PROPERTY -->
+    <UsedClass>
+        <Name>List_EmployeeProperty</Name>
+        <Mode>Current</Mode>
+        <AddNewInstanceIfEmpty>true</AddNewInstanceIfEmpty>
+        <DefaultStatus>Insert</DefaultStatus>
+    </UsedClass>
+    <!-- Used Class for Employee Work Assignment Manager -->
+    <UsedClass>
+        <Name>List_ManagerEmployeeWorkAssignment</Name>
+        <Mode>Current</Mode>
+        <AddNewInstanceIfEmpty>true</AddNewInstanceIfEmpty>
+        <DefaultStatus>Insert</DefaultStatus>
+    </UsedClass>
+    <!-- Used Class for Person Marital Status -->
+    <UsedClass>
+        <Name>List_EmployeeMaritalStatus</Name>
+        <Mode>Current</Mode>
+        <AddNewInstanceIfEmpty>true</AddNewInstanceIfEmpty>
+        <DefaultStatus>Insert</DefaultStatus>
+    </UsedClass>
+    <!-- Used Class for Person Email Address -->
+    <UsedClass>
+        <Name>List_PersonContactElectronicAddress</Name>
+        <AddNewInstanceIfEmpty>true</AddNewInstanceIfEmpty>
+    </UsedClass>
+    <!-- Used Class for Person Phone Address -->
+    <UsedClass>
+        <Name>List_PersonContactPhoneNumber</Name>
+        <AddNewInstanceIfEmpty>true</AddNewInstanceIfEmpty>
+    </UsedClass>
+    <!-- EmergencyContact -->
+    <UsedClass>
+        <Name>List_EmergencyContact</Name>
+        <AddNewInstanceIfEmpty>true</AddNewInstanceIfEmpty>
+        <AllowModeChange>true</AllowModeChange>
+        <DefaultStatus>Update</DefaultStatus>
+        <Mode>Primary</Mode>
+    </UsedClass>
+    <UsedClass>
+        <Name>List_EmergencyContactPhoneNumber</Name>
+        <AllowModeChange>true</AllowModeChange>
+        <DefaultStatus>Update</DefaultStatus>
+    </UsedClass>
+    <UsedClass>
+        <Name>List_EmergencyContactElectronicAddress</Name>
+        <AllowModeChange>true</AllowModeChange>
+        <DefaultStatus>Update</DefaultStatus>
+    </UsedClass>
+    <UsedClass>
+        <Name>List_UserPrestartRoleList</Name>
+        <Mode>Current</Mode>
+        <AddNewInstanceIfEmpty>true</AddNewInstanceIfEmpty>
+    </UsedClass>
+    <UsedClass>
+        <Name>List_UserRoleList</Name>
+        <Mode>Current</Mode>
+        <AddNewInstanceIfEmpty>true</AddNewInstanceIfEmpty>
+    </UsedClass>
+    <UsedClass>
+        <Name>List_UserOrgUnitList</Name>
+        <Mode>Current</Mode>
+        <AddNewInstanceIfEmpty>true</AddNewInstanceIfEmpty>
+    </UsedClass>
+    <!-- Diretc Deposit -->
+    <UsedClass>
+        <Name>List_EmployeeDirectDeposit</Name>
+        <Mode>All</Mode>
+    </UsedClass>
+    <FormBody>
+        <Style>IVFormBody</Style>
+        <Block>
+            <Style/>
+            <NumberOfColumns>4</NumberOfColumns>
+        </Block>
+        <!-- Personal Details -->
+        <Panel>
+            <Style>IVPanel</Style>
+            <Caption>lblPersonalDetails</Caption>
+            <Row>0</Row>
+            <Column>0</Column>
+            <ColumnSpan>4</ColumnSpan>
+        </Panel>
+        <Label>
+            <Style>InLineHelpLabel</Style>
+            <Caption>lblInlineHelpNewHirePersonalDetails</Caption>
+            <Row>1</Row>
+            <Column>0</Column>
+            <ColumnSpan>4</ColumnSpan>
+        </Label>
+        <!-- Number -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblNumber</Caption>
+            <MarkAsRequired>true</MarkAsRequired>
+            <Visible>EmployeeAlgorithmValidation</Visible>
+            <Row>2</Row>
+            <Column>0</Column>
+        </Label>
+        <Field>
+            <Style>IVTextBox</Style>
+            <Row>3</Row>
+            <Column>0</Column>
+            <Visible>EmployeeAlgorithmValidation</Visible>
+            <BindingProperty>List_EmployeeEmploymentStatus.EmployeeNumber</BindingProperty>
+            <IsRequired>true</IsRequired>
+        </Field>
+        <!-- First Name -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblFirstName</Caption>
+            <MarkAsRequired>true</MarkAsRequired>
+            <Row>4</Row>
+            <Column>0</Column>
+        </Label>
+        <Field>
+            <Style>IVTextBox</Style>
+            <Row>5</Row>
+            <Column>0</Column>
+            <BindingProperty>FirstName</BindingProperty>
+            <IsRequired>true</IsRequired>
+        </Field>
+        <!-- Middle Name -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblMiddleName</Caption>
+            <Row>4</Row>
+            <Column>1</Column>
+        </Label>
+        <Field>
+            <Style>IVTextBox</Style>
+            <Row>5</Row>
+            <Column>1</Column>
+            <BindingProperty>MiddleName</BindingProperty>
+            <IsRequired>false</IsRequired>
+        </Field>
+        <!-- Last Name -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblLastName</Caption>
+            <MarkAsRequired>true</MarkAsRequired>
+            <Row>4</Row>
+            <Column>2</Column>
+        </Label>
+        <Field>
+            <Style>IVTextBox</Style>
+            <Row>5</Row>
+            <Column>2</Column>
+            <IsRequired>true</IsRequired>
+            <BindingProperty>LastName</BindingProperty>
+        </Field>
+        <!-- Preferred First Name -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblPreferredFirstName</Caption>
+            <Row>4</Row>
+            <Column>3</Column>
+        </Label>
+        <Field>
+            <Style>IVTextBox</Style>
+            <Row>5</Row>
+            <Column>3</Column>
+            <IsRequired>false</IsRequired>
+            <BindingProperty>CommonName</BindingProperty>
+        </Field>
+        <!-- Gender -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblGender</Caption>
+            <MarkAsRequired>true</MarkAsRequired>
+            <Row>6</Row>
+            <Column>0</Column>
+        </Label>
+        <Field>
+            <Style>IVComboBox2</Style>
+            <BindingProperty>Gender</BindingProperty>
+            <DataProvider>GenderTypes</DataProvider>
+            <DisplayMemberPath>LocalizedName</DisplayMemberPath>
+            <SelectedValuePath>Id</SelectedValuePath>
+            <Row>7</Row>
+            <Column>0</Column>
+            <IsRequired>true</IsRequired>
+        </Field>
+        <!-- Marital Status -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblMaritalStatus</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>6</Row>
+            <Column>1</Column>
+        </Label>
+        <Field>
+            <Style>IVComboBox2</Style>
+            <BindingProperty>List_EmployeeMaritalStatus.MaritalStatusId</BindingProperty>
+            <DataProvider>MaritalStatuses</DataProvider>
+            <DisplayMemberPath>ShortName</DisplayMemberPath>
+            <SelectedValuePath>MaritalStatusId</SelectedValuePath>
+            <Row>7</Row>
+            <Column>1</Column>
+            <IsRequired>false</IsRequired>
+        </Field>
+        <!-- SSN/SIN -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblSocialSecurityNumber</Caption>
+            <Row>6</Row>
+            <Column>2</Column>
+        </Label>
+        <Field>
+            <Style>IVTextBox</Style>
+            <Row>7</Row>
+            <Column>2</Column>
+            <BindingProperty>SocialSecurityNumber</BindingProperty>
+        </Field>
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblSINExpiryDate</Caption>
+            <Row>6</Row>
+            <Column>3</Column>
+        </Label>
+        <Field>
+            <Style>IVDatePicker</Style>
+            <Row>7</Row>
+            <Column>3</Column>
+            <BindingProperty>SSNExpiryDate</BindingProperty>
+            <Visible>true</Visible>
+        </Field>
+        <!-- Birth Date -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblBirthDate</Caption>
+            <MarkAsRequired>true</MarkAsRequired>
+            <Row>8</Row>
+            <Column>0</Column>
+        </Label>
+        <Field>
+            <Style>IVDatePicker</Style>
+            <Row>9</Row>
+            <Column>0</Column>
+            <BindingProperty>BirthDate</BindingProperty>
+            <Visible>true</Visible>
+            <IsRequired>true</IsRequired>
+        </Field>
+        <!-- Citizenship -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblCitizenship</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>8</Row>
+            <Column>1</Column>
+        </Label>
+        <Field>
+            <Style>IVComboBox2</Style>
+            <BindingProperty>CitizenshipTypeId</BindingProperty>
+            <DataProvider>CitizenshipTypes</DataProvider>
+            <DisplayMemberPath>ShortName</DisplayMemberPath>
+            <SelectedValuePath>DFCitizenshipTypeId</SelectedValuePath>
+            <Row>9</Row>
+            <Column>1</Column>
+            <IsRequired>false</IsRequired>
+        </Field>
+        <!-- Language -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblLanguage</Caption>
+            <MarkAsRequired>true</MarkAsRequired>
+            <Row>8</Row>
+            <Column>2</Column>
+        </Label>
+        <Field>
+            <Style>IVComboBox2</Style>
+            <BindingProperty>AppUser.CultureID</BindingProperty>
+            <DataProvider>Languages</DataProvider>
+            <DisplayMemberPath>ShortName</DisplayMemberPath>
+            <SelectedValuePath>CultureId</SelectedValuePath>
+            <Row>9</Row>
+            <Column>2</Column>
+            <IsRequired>true</IsRequired>
+        </Field>
+        <!-- Hire Date -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblHireDate</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>8</Row>
+            <Column>3</Column>
+        </Label>
+        <Field>
+            <Style>IVDatePicker</Style>
+            <Row>9</Row>
+            <Column>3</Column>
+            <BindingProperty>HireDate</BindingProperty>
+            <InitialValue>function:today</InitialValue>
+            <Visible>true</Visible>
+            <IsRequired>false</IsRequired>
+        </Field>
+        <!--Employment End Date-->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>Employment End Date</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>10</Row>
+            <Column>0</Column>
+        </Label>
+        <EmployeeProperty>
+            <Style>IVDatePicker</Style>
+            <Block>1</Block>
+            <Row>11</Row>
+            <Column>0</Column>
+            <IsRequired>false</IsRequired>
+            <PropertyXRefCode>EmployeePropertyXrefCode2</PropertyXRefCode>
+        </EmployeeProperty>
+        <!-- Employee Address Information -->
+        <Panel>
+            <Style>IVPanel</Style>
+            <Caption>lblAddress</Caption>
+            <Row>12</Row>
+            <Column>0</Column>
+            <ColumnSpan>4</ColumnSpan>
+        </Panel>
+        <Label>
+            <Style>InLineHelpLabel</Style>
+            <Caption>lblInlineHelpNewHireAddress</Caption>
+            <!--<Caption>lblhelp</Caption>-->
+            <Row>13</Row>
+            <Column>0</Column>
+            <ColumnSpan>4</ColumnSpan>
+        </Label>
+        <!-- Address Line 1 -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblAddress1</Caption>
+            <MarkAsRequired>true</MarkAsRequired>
+            <Row>14</Row>
+            <Column>0</Column>
+            <InitialValue>Test</InitialValue>
+        </Label>
+        <Field>
+            <Style>IVTextBox</Style>
+            <BindingProperty>List_PersonAddress.Address1</BindingProperty>
+            <Row>15</Row>
+            <Column>0</Column>
+            <IsRequired>true</IsRequired>
+        </Field>
+        <!-- Address Line 2 -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblAddress2</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>14</Row>
+            <Column>1</Column>
+        </Label>
+        <Field>
+            <Style>IVTextBox</Style>
+            <Row>15</Row>
+            <Column>1</Column>
+            <IsRequired>false</IsRequired>
+            <BindingProperty>List_PersonAddress.Address2</BindingProperty>
+        </Field>
+        <!-- City -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblCity</Caption>
+            <MarkAsRequired>true</MarkAsRequired>
+            <Row>14</Row>
+            <Column>2</Column>
+        </Label>
+        <Field>
+            <Style>IVTextBox</Style>
+            <Row>15</Row>
+            <Column>2</Column>
+            <IsRequired>true</IsRequired>
+            <BindingProperty>List_PersonAddress.City</BindingProperty>
+        </Field>
+        <!-- Postal Code -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblPostalCode</Caption>
+            <MarkAsRequired>true</MarkAsRequired>
+            <Row>14</Row>
+            <Column>3</Column>
+        </Label>
+        <Field>
+            <Style>IVTextBox</Style>
+            <Row>15</Row>
+            <Column>3</Column>
+            <IsRequired>true</IsRequired>
+            <BindingProperty>List_PersonAddress.PostalCode</BindingProperty>
+        </Field>
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblCounty</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>16</Row>
+            <Column>0</Column>
+        </Label>
+        <Field>
+            <Style>IVTextBox</Style>
+            <Row>17</Row>
+            <Column>0</Column>
+            <IsRequired>false</IsRequired>
+            <BindingProperty>List_PersonAddress.County</BindingProperty>
+        </Field>
+        <!-- Default value set for the Contact Type for Person Address is set to Primary Address -->
+        <Field>
+            <BindingProperty>List_PersonAddress.ContactInformationTypeId</BindingProperty>
+            <Style>IVTextBox</Style>
+            <Row>16</Row>
+            <Column>2</Column>
+            <Visible>false</Visible>
+            <InitialValue>1</InitialValue>
+        </Field>
+        <!-- Country And State/Province Information, this is a custom control -->
+        <CascadingCountryStateSelector>
+            <Row>16</Row>
+            <Column>1</Column>
+            <IsRequired>True</IsRequired>
+        </CascadingCountryStateSelector>
+        <!-- Home Phone Number -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblHomePhone</Caption>
+            <MarkAsRequired>true</MarkAsRequired>
+            <Row>16</Row>
+            <Column>3</Column>
+        </Label>
+        <Field>
+            <Style>IVTextBox</Style>
+            <Row>17</Row>
+            <Column>3</Column>
+            <IsRequired>true</IsRequired>
+            <BindingProperty>List_PersonContactPhoneNumber.ContactNumber</BindingProperty>
+        </Field>
+        <!-- Employee Email Address -->
+        <Panel>
+            <Style>IVPanel</Style>
+            <Caption>Employee Email Addresses</Caption>
+            <Row>19</Row>
+            <Column>0</Column>
+            <ColumnSpan>4</ColumnSpan>
+        </Panel>
+        <Label>
+            <Style>InLineHelpLabel</Style>
+            <Caption>lblInlineHelpNewHireAddress</Caption>
+            <!--<Caption>lblhelp</Caption>-->
+            <Row>20</Row>
+            <Column>0</Column>
+            <ColumnSpan>4</ColumnSpan>
+        </Label>
+        <Grid>
+            <Block>1</Block>
+            <Row>21</Row>
+            <Column>0</Column>
+            <ColumnSpan>4</ColumnSpan>
+            <RowSpan>3</RowSpan>
+            <ItemSource>List_PersonContactElectronicAddress</ItemSource>
+            <AuthorizationKey>HRMS_CONTACT</AuthorizationKey>
+            <GridColumn>
+                <BindingProperty>ContactInformationTypeId</BindingProperty>
+                <HeaderCaption>lblType</HeaderCaption>
+                <DataProvider>ContactInformationTypes</DataProvider>
+                <DisplayMemberPath>ShortName</DisplayMemberPath>
+                <SelectedValuePath>ContactInformationTypeId</SelectedValuePath>
+                <IsRequired>false</IsRequired>
+                <Filter>
+                    <FieldName>ContactInformationTypeGroupXRefCode</FieldName>
+                    <FieldValue>ElectronicAddress</FieldValue>
+                </Filter>
+                <MultipleSeperateFilters>True</MultipleSeperateFilters>
+            </GridColumn>
+            <GridColumn>
+                <BindingProperty>ElectronicAddress</BindingProperty>
+                <HeaderCaption>lblAddress</HeaderCaption>
+                <IsRequired>false</IsRequired>
+            </GridColumn>
+        </Grid>
+        <!-- Send First time Access Email -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Block>1</Block>
+            <Row>23</Row>
+            <Column>0</Column>
+            <ColumnSpan>2</ColumnSpan>
+            <Caption>Send First Time Access Email?</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+        </Label>
+        <Field>
+            <Style>IVCheckBox</Style>
+            <Block>1</Block>
+            <Row>23</Row>
+            <Column>2</Column>
+            <ColumnSpan>1</ColumnSpan>
+            <BindingProperty>SendFirstTimeAccessEmail</BindingProperty>
+            <IsRequired>false</IsRequired>
+        </Field>
+        <!-- Position, Location, Compensation -->
+        <Panel>
+            <Style>IVPanel</Style>
+            <Caption>lblPositionLocationCompensation</Caption>
+            <Row>24</Row>
+            <Column>0</Column>
+            <ColumnSpan>4</ColumnSpan>
+        </Panel>
+        <Label>
+            <Style>InLineHelpLabel</Style>
+            <Caption>lblInlineHelpNewHirePosition</Caption>
+            <Row>25</Row>
+            <Column>0</Column>
+            <ColumnSpan>4</ColumnSpan>
+        </Label>
+        <PositionLocationSelectorV2>
+            <Block>1</Block>
+            <Row>26</Row>
+            <Column>0</Column>
+            <ColumnSpan>2</ColumnSpan>
+            <IsRequired>true</IsRequired>
+            <AutoPopulatePositionFields>true</AutoPopulatePositionFields>
+            <AutoPopulateSalaryField>true</AutoPopulateSalaryField>
+        </PositionLocationSelectorV2>
+        <!-- Manager Selector -->
+        <Panel>
+            <Style>IVPanel</Style>
+            <Caption>lblManager</Caption>
+            <Row>29</Row>
+            <Column>0</Column>
+            <ColumnSpan>4</ColumnSpan>
+            <AuthorizationKey>HRMS_EWA_PRIMARY</AuthorizationKey>
+        </Panel>
+        <ManagerSelector>
+            <Row>30</Row>
+            <Column>0</Column>
+            <ColumnSpan>4</ColumnSpan>
+            <RespectOrgSecurity>true</RespectOrgSecurity>
+            <RestrictToManagerAuthority>false</RestrictToManagerAuthority>
+            <RestrictToTargetEmployeeOrg>false</RestrictToTargetEmployeeOrg>
+            <DisableDerivedManager>false</DisableDerivedManager>
+        </ManagerSelector>
+        <!-- Business Title -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Row>31</Row>
+            <Column>0</Column>
+            <Caption>lblBusinessTitle</Caption>
+            <Visible>False</Visible>
+        </Label>
+        <Field>
+            <Style>IVTextBox</Style>
+            <Row>32</Row>
+            <Column>0</Column>
+            <BindingProperty>List_EmployeeWorkAssignment.BusinessTitle</BindingProperty>
+            <Visible>False</Visible>
+        </Field>
+        <!-- Status and Compensation -->
+        <Panel>
+            <Style>IVPanel</Style>
+            <Caption>lblStatusAndCompensation</Caption>
+            <Row>33</Row>
+            <Column>0</Column>
+            <ColumnSpan>4</ColumnSpan>
+        </Panel>
+        <Label>
+            <Style>InLineHelpLabel</Style>
+            <Caption>lblInlineHelpNewHireStatus</Caption>
+            <Row>34</Row>
+            <Column>0</Column>
+            <ColumnSpan>4</ColumnSpan>
+        </Label>
+        <!-- Hidden Pre-Start Status - make visible in custom forms if needed -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblPrestartStatus</Caption>
+            <Row>35</Row>
+            <Column>0</Column>
+            <!-- <Visible>true</Visible> -->
+            <Visible>False</Visible>
+        </Label>
+        <Field>
+            <Style>IVComboBox2</Style>
+            <BindingProperty>List_EmployeeEmploymentPrestartStatus.EmploymentStatusId</BindingProperty>
+            <DataProvider>EmploymentStatuses</DataProvider>
+            <Filter>
+                <FieldName>EmploymentStatusGroupCode</FieldName>
+                <FieldValue>PRESTART</FieldValue>
+            </Filter>
+            <DisplayMemberPath>ShortName</DisplayMemberPath>
+            <SelectedValuePath>EmploymentStatusId</SelectedValuePath>
+            <Row>36</Row>
+            <Column>0</Column>
+            <!-- <Visible>true</Visible> -->
+            <Visible>False</Visible>
+        </Field>
+        <!-- Status Control/Field -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblStatus</Caption>
+            <MarkAsRequired>true</MarkAsRequired>
+            <Row>37</Row>
+            <Column>0</Column>
+        </Label>
+        <Field>
+            <Style>IVComboBox2</Style>
+            <BindingProperty>List_EmployeeEmploymentStatus.EmploymentStatusId</BindingProperty>
+            <DataProvider>EmploymentStatuses</DataProvider>
+            <Filter>
+                <FieldName>EmploymentStatusGroupCode</FieldName>
+                <FieldValue>ACTIVE</FieldValue>
+            </Filter>
+            <DisplayMemberPath>ShortName</DisplayMemberPath>
+            <SelectedValuePath>EmploymentStatusId</SelectedValuePath>
+            <Row>38</Row>
+            <Column>0</Column>
+            <IsRequired>true</IsRequired>
+        </Field>
+        <!-- Pay Type -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblPayType</Caption>
+            <MarkAsRequired>true</MarkAsRequired>
+            <Row>37</Row>
+            <Column>1</Column>
+        </Label>
+        <Field>
+            <FieldId>ComboPayType</FieldId>
+            <Style>IVComboBox2</Style>
+            <SelectionChangedEventProcess>True</SelectionChangedEventProcess>
+            <BindingProperty>List_EmployeeEmploymentStatus.PayTypeId</BindingProperty>
+            <DataProvider>PayTypes</DataProvider>
+            <DisplayMemberPath>ShortName</DisplayMemberPath>
+            <SelectedValuePath>PayTypeId</SelectedValuePath>
+            <Row>38</Row>
+            <Column>1</Column>
+            <IsRequired>true</IsRequired>
+        </Field>
+        <!-- Pay Class -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblPayClass</Caption>
+            <MarkAsRequired>true</MarkAsRequired>
+            <Row>37</Row>
+            <Column>2</Column>
+        </Label>
+        <Field>
+            <FieldId>ComboPayClass</FieldId>
+            <Style>IVComboBox2</Style>
+            <BindingProperty>List_EmployeeEmploymentStatus.PayClassId</BindingProperty>
+            <DataProvider>PayClasses</DataProvider>
+            <DisplayMemberPath>ShortName</DisplayMemberPath>
+            <SelectedValuePath>PayClassId</SelectedValuePath>
+            <SelectionChangedEventProcess>True</SelectionChangedEventProcess>
+            <Row>38</Row>
+            <Column>2</Column>
+            <IsRequired>true</IsRequired>
+        </Field>
+        <!-- Pay Group -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblPayGroup</Caption>
+            <MarkAsRequired>true</MarkAsRequired>
+            <Row>37</Row>
+            <Column>3</Column>
+        </Label>
+        <Field>
+            <FieldId>ComboPayGroup</FieldId>
+            <Style>IVComboBox2</Style>
+            <SelectionChangedEventProcess>True</SelectionChangedEventProcess>
+            <BindingProperty>List_EmployeeEmploymentStatus.PayGroupId</BindingProperty>
+            <DataProvider>PayGroups</DataProvider>
+            <DisplayMemberPath>ShortName</DisplayMemberPath>
+            <SelectedValuePath>PayGroupId</SelectedValuePath>
+            <Row>38</Row>
+            <Column>3</Column>
+            <IsRequired>true</IsRequired>
+        </Field>
+        <!-- Time Off Policy -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblTimeOffPolicy</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>39</Row>
+            <Column>0</Column>
+        </Label>
+        <Field>
+            <Style>IVComboBox2</Style>
+            <BindingProperty>List_EmployeeEmploymentStatus.TimeOffPolicyId</BindingProperty>
+            <DataProvider>TimeOffPolicies</DataProvider>
+            <DisplayMemberPath>ShortName</DisplayMemberPath>
+            <SelectedValuePath>TimeOffPolicyId</SelectedValuePath>
+            <Row>40</Row>
+            <Column>0</Column>
+            <IsRequired>false</IsRequired>
+        </Field>
+        <!-- Punch Policy -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblPunchPolicy</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>39</Row>
+            <Column>1</Column>
+        </Label>
+        <Field>
+            <Style>IVComboBox2</Style>
+            <BindingProperty>List_EmployeeEmploymentStatus.PunchPolicyId</BindingProperty>
+            <DataProvider>PunchPolicies</DataProvider>
+            <DisplayMemberPath>ShortName</DisplayMemberPath>
+            <SelectedValuePath>PunchPolicyId</SelectedValuePath>
+            <Row>40</Row>
+            <Column>1</Column>
+            <IsRequired>false</IsRequired>
+        </Field>
+        <!-- Pay Policy -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblPayPolicy</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>39</Row>
+            <Column>2</Column>
+        </Label>
+        <Field>
+            <Style>IVComboBox2</Style>
+            <BindingProperty>List_EmployeeEmploymentStatus.PayPolicyId</BindingProperty>
+            <DataProvider>PayPolicies</DataProvider>
+            <DisplayMemberPath>ShortName</DisplayMemberPath>
+            <SelectedValuePath>PayPolicyId</SelectedValuePath>
+            <Row>40</Row>
+            <Column>2</Column>
+            <IsRequired>false</IsRequired>
+        </Field>
+        <!-- Holiday Group -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblPayHolidayGroup</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>39</Row>
+            <Column>3</Column>
+        </Label>
+        <Field>
+            <Style>IVComboBox2</Style>
+            <BindingProperty>List_EmployeeEmploymentStatus.PayHolidayGroupId</BindingProperty>
+            <DataProvider>PayHolidayGroups</DataProvider>
+            <DisplayMemberPath>ShortName</DisplayMemberPath>
+            <SelectedValuePath>PayHolidayGroupId</SelectedValuePath>
+            <Row>40</Row>
+            <Column>3</Column>
+            <IsRequired>false</IsRequired>
+        </Field>
+        <!-- Schedule Rule Policy -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblScheduleRulePolicy</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>41</Row>
+            <Column>0</Column>
+        </Label>
+        <Field>
+            <Style>IVComboBox2</Style>
+            <BindingProperty>List_EmployeeEmploymentStatus.EmployeeSchedulePolicyId</BindingProperty>
+            <DataProvider>EmployeeSchedulePolicies</DataProvider>
+            <DisplayMemberPath>ShortName</DisplayMemberPath>
+            <SelectedValuePath>PolicyId</SelectedValuePath>
+            <Row>42</Row>
+            <Column>0</Column>
+            <IsRequired>false</IsRequired>
+        </Field>
+        <!-- Shift Trading Policy -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblShiftTradePolicy</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>41</Row>
+            <Column>1</Column>
+        </Label>
+        <Field>
+            <Style>IVComboBox2</Style>
+            <BindingProperty>List_EmployeeEmploymentStatus.ShiftTradePolicyId</BindingProperty>
+            <DataProvider>ShiftTradePolicies</DataProvider>
+            <DisplayMemberPath>ShortName</DisplayMemberPath>
+            <SelectedValuePath>ShiftTradePolicyId</SelectedValuePath>
+            <Row>42</Row>
+            <Column>1</Column>
+            <IsRequired>false</IsRequired>
+        </Field>
+        <!-- Overtime Group -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblEmployeeOTGroup</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>41</Row>
+            <Column>2</Column>
+        </Label>
+        <Field>
+            <Style>IVComboBox2</Style>
+            <BindingProperty>List_EmployeeEmploymentStatus.EmployeeOTGroupId</BindingProperty>
+            <DataProvider>EmployeeOTGroups</DataProvider>
+            <DisplayMemberPath>ShortName</DisplayMemberPath>
+            <SelectedValuePath>EmployeeOTGroupId</SelectedValuePath>
+            <Row>42</Row>
+            <Column>2</Column>
+            <IsRequired>false</IsRequired>
+        </Field>
+        <!-- Payroll Policy -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblPayrollPolicy</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>41</Row>
+            <Column>3</Column>
+        </Label>
+        <Field>
+            <Style>IVComboBox2</Style>
+            <BindingProperty>List_EmployeeEmploymentStatus.PRPayrollPolicyId</BindingProperty>
+            <DataProvider>PayrollPolicies</DataProvider>
+            <DisplayMemberPath>ShortName</DisplayMemberPath>
+            <SelectedValuePath>PRPayrollPolicyId</SelectedValuePath>
+            <Row>42</Row>
+            <Column>3</Column>
+            <IsRequired>false</IsRequired>
+        </Field>
+        <!-- Weekly Hours -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblWeeklyHours</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>43</Row>
+            <Column>0</Column>
+        </Label>
+        <Field>
+            <FieldId>TextNormalHours</FieldId>
+            <Style>IVTextBoxRight</Style>
+            <Row>44</Row>
+            <Column>0</Column>
+            <IsRequired>false</IsRequired>
+            <BindingProperty>List_EmployeeEmploymentStatus.NormalWeeklyHours</BindingProperty>
+        </Field>
+        <!-- Daily Hours -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>Avergae Daily Hours</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>43</Row>
+            <Column>1</Column>
+        </Label>
+        <Field>
+            <Style>IVTextBoxRight</Style>
+            <Row>44</Row>
+            <Column>1</Column>
+            <IsRequired>false</IsRequired>
+            <BindingProperty>List_EmployeeEmploymentStatus.AverageDailyHours</BindingProperty>
+        </Field>
+        <!-- Entitlement Policy -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblEntitlementPolicy</Caption>
+            <MarkAsRequired>true</MarkAsRequired>
+            <Row>43</Row>
+            <Column>2</Column>
+        </Label>
+        <Field>
+            <Style>IVComboBox2</Style>
+            <BindingProperty>List_EmployeeEmploymentStatus.EntitlementPolicyId</BindingProperty>
+            <DataProvider>EntitlementPolicies</DataProvider>
+            <DisplayMemberPath>ShortName</DisplayMemberPath>
+            <SelectedValuePath>EntitlementPolicyId</SelectedValuePath>
+            <Row>44</Row>
+            <Column>2</Column>
+            <IsRequired>true</IsRequired>
+        </Field>
+        <!-- Schedule Change Policy -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblScheduleChangePolicy</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>43</Row>
+            <Column>3</Column>
+        </Label>
+        <Field>
+            <Style>IVComboBox2</Style>
+            <BindingProperty>List_EmployeeEmploymentStatus.ScheduleChangePolicyId</BindingProperty>
+            <DataProvider>ScheduleChangePolicies</DataProvider>
+            <DisplayMemberPath>ShortName</DisplayMemberPath>
+            <SelectedValuePath>ScheduleChangePolicyId</SelectedValuePath>
+            <Row>44</Row>
+            <Column>3</Column>
+            <IsRequired>false</IsRequired>
+        </Field>
+        <RateSelector>
+            <Style>IVTextBoxRight</Style>
+            <Row>46</Row>
+            <Column>0</Column>
+            <ColumnSpan>2</ColumnSpan>
+            <IsRequired>true</IsRequired>
+            <BindingProperty>List_EmployeeEmploymentStatus.WorkingRateSalary</BindingProperty>
+        </RateSelector>
+        <!-- Daily Rate -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblDailyRate</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>48</Row>
+            <Column>0</Column>
+        </Label>
+        <Field>
+            <FieldId>TextDailyRate</FieldId>
+            <Style>IVTextBoxRight</Style>
+            <Row>49</Row>
+            <Column>0</Column>
+            <IsRequired>false</IsRequired>
+            <BindingProperty>List_EmployeeEmploymentStatus.DailyRate</BindingProperty>
+        </Field>
+        <!-- Authorization Policy -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblAuthorizationPolicy</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>48</Row>
+            <Column>1</Column>
+        </Label>
+        <Field>
+            <Style>IVComboBox2</Style>
+            <BindingProperty>List_EmployeeEmploymentStatus.AuthorizationPolicyId</BindingProperty>
+            <DataProvider>AuthorizationPolicies</DataProvider>
+            <DisplayMemberPath>ShortName</DisplayMemberPath>
+            <SelectedValuePath>AuthorizationPolicyId</SelectedValuePath>
+            <Row>49</Row>
+            <Column>1</Column>
+            <IsRequired>false</IsRequired>
+        </Field>
+        <!--Employee Physical location -->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>Employee's Physical location</Caption>
+            <MarkAsRequired>true</MarkAsRequired>
+            <Block>1</Block>
+            <Row>48</Row>
+            <Column>2</Column>
+        </Label>
+        <EmployeeProperty>
+            <Style>IVComboBox2</Style>
+            <Block>1</Block>
+            <Row>49</Row>
+            <Column>2</Column>
+            <IsRequired>true</IsRequired>
+            <PropertyXRefCode>EmployeePropertyXrefCode3</PropertyXRefCode>
+        </EmployeeProperty>
+        <!--Employee Bonus-->
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>Bonus</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Block>1</Block>
+            <Row>48</Row>
+            <Column>3</Column>
+        </Label>
+        <EmployeeProperty>
+            <Style>IVTextBoxRight</Style>
+            <Block>1</Block>
+            <Row>49</Row>
+            <Column>3</Column>
+            <MarkAsRequired>false</MarkAsRequired>
+            <PropertyXRefCode>EmployeePropertyXrefCode1</PropertyXRefCode>
+        </EmployeeProperty>
+        <!-- Emergency Contacts -->
+        <Panel>
+            <Style>IVPanel</Style>
+            <Caption>lblEmergencyContacts</Caption>
+            <Row>50</Row>
+            <Column>0</Column>
+            <ColumnSpan>4</ColumnSpan>
+        </Panel>
+        <Label>
+            <Style>InLineHelpLabel</Style>
+            <Caption>lblInlineHelpNewHirePrimaryEmergencyContact</Caption>
+            <!--<Caption>lblhelp</Caption>-->
+            <Row>51</Row>
+            <Column>0</Column>
+            <ColumnSpan>4</ColumnSpan>
+        </Label>
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblPrimaryContact</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>52</Row>
+            <Column>0</Column>
+        </Label>
+        <Field>
+            <Style>IVTextBox</Style>
+            <Row>53</Row>
+            <Column>0</Column>
+            <BindingProperty>List_EmergencyContact.FirstName</BindingProperty>
+            <IsRequired>false</IsRequired>
+        </Field>
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblPhoneNumber</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>52</Row>
+            <Column>1</Column>
+        </Label>
+        <Field>
+            <Style>IVTextBox</Style>
+            <Row>53</Row>
+            <Column>1</Column>
+            <IsRequired>false</IsRequired>
+            <BindingProperty>List_EmergencyContact.List_EmergencyContactPhoneNumber.ContactNumber</BindingProperty>
+        </Field>
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblEmail</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>52</Row>
+            <Column>2</Column>
+        </Label>
+        <Field>
+            <Style>IVTextBox</Style>
+            <Row>53</Row>
+            <Column>2</Column>
+            <IsRequired>false</IsRequired>
+            <BindingProperty>List_EmergencyContact.List_EmergencyContactElectronicAddress.ElectronicAddress
+            </BindingProperty>
+        </Field>
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblRelationship</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Row>52</Row>
+            <Column>3</Column>
+        </Label>
+        <Field>
+            <Style>IVComboBox2</Style>
+            <BindingProperty>List_EmergencyContact.RelationshipTypeId</BindingProperty>
+            <DataProvider>RelationshipTypes</DataProvider>
+            <DisplayMemberPath>ShortName</DisplayMemberPath>
+            <SelectedValuePath>RelationshipTypeId</SelectedValuePath>
+            <Row>53</Row>
+            <Column>3</Column>
+            <IsRequired>false</IsRequired>
+        </Field>
+        <Panel>
+            <Style>IVPanel</Style>
+            <Caption>lblDayforceUserCredentials</Caption>
+            <Row>57</Row>
+            <Column>0</Column>
+            <ColumnSpan>4</ColumnSpan>
+            <Visible>employeenewhireroleenabledandemployeeloginalgorithmrule</Visible>
+        </Panel>
+        <Label>
+            <Style>InLineHelpLabel</Style>
+            <Caption>lblInlineHelpNewHireUserCredentials</Caption>
+            <Row>58</Row>
+            <Column>0</Column>
+            <ColumnSpan>4</ColumnSpan>
+            <Visible>employeenewhireroleenabledandemployeeloginalgorithmrule</Visible>
+        </Label>
+        <Label>
+            <Style>IVLabel</Style>
+            <Caption>lblUserName</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+            <Visible>employeeloginalgorithm</Visible>
+            <Row>59</Row>
+            <Column>0</Column>
+        </Label>
+        <Field>
+            <Style>IVTextBox</Style>
+            <Row>60</Row>
+            <Column>0</Column>
+            <Visible>employeeloginalgorithm</Visible>
+            <IsRequired>false</IsRequired>
+            <BindingProperty>AppUser.LoginId</BindingProperty>
+        </Field>
+        <PrestartRoleSelector>
+            <Block>1</Block>
+            <Row>62</Row>
+            <Column>0</Column>
+            <Visible>employeenewhireprestartrolesenabled</Visible>
+        </PrestartRoleSelector>
+        <RoleLocationSelector>
+            <Block>1</Block>
+            <Row>62</Row>
+            <Column>1</Column>
+            <ColumnSpan>2</ColumnSpan>
+            <Visible>Employeenewhirerolesenabled</Visible>
+        </RoleLocationSelector>
+        <Panel>
+            <Style>IVPanel</Style>
+            <Caption>lblSupportingDocuments</Caption>
+            <Row>67</Row>
+            <Column>0</Column>
+        </Panel>
+        <Label>
+            <Style>InLineHelpLabel</Style>
+            <Block>1</Block>
+            <Row>68</Row>
+            <Column>0</Column>
+            <ColumnSpan>4</ColumnSpan>
+            <Caption>lblAttachAdditionalDetails</Caption>
+            <MarkAsRequired>false</MarkAsRequired>
+        </Label>
+        <UploadDownload>
+            <DocMgmtTypeXRefCodes>
+                <DocMgmtTypeXRefCode>HIRE</DocMgmtTypeXRefCode>
+            </DocMgmtTypeXRefCodes>
+            <Block>1</Block>
+            <Row>69</Row>
+            <RowSpan>6</RowSpan>
+            <Column>0</Column>
+            <ColumnSpan>4</ColumnSpan>
+            <ItemSource>List_DocMgmtFileStore</ItemSource>
+        </UploadDownload>
+        <Comment>
+            <Row>71</Row>
+            <CommentField>List_EmployeeFile.Comment</CommentField>
+            <FlagField>List_EmployeeFile.SaveComment</FlagField>
+            <IsReadOnly>False</IsReadOnly>
+            <IsRequired>False</IsRequired>
+        </Comment>
+        <Field>
+            <Style>IVDatePicker</Style>
+            <Row>72</Row>
+            <Column>0</Column>
+            <BindingProperty>GlobalEffectiveStart</BindingProperty>
+            <Visible>false</Visible>
+            <InitialValue>function:today</InitialValue>
+        </Field>
+        <Grid>
+            <Block>1</Block>
+            <Row>73</Row>
+
+            <Column>0</Column>
+
+            <RowSpan>8</RowSpan>
+
+            <ItemSource>List_EmployeeDirectDeposit</ItemSource>
+
+            <GridColumn>
+
+                <BindingProperty>DepositNumber</BindingProperty>
+
+                <HeaderCaption>lblDepositNumber</HeaderCaption>
+
+                <IsRequired>true</IsRequired>
+
+            </GridColumn>
+
+            <GridColumn>
+
+                <BindingProperty>IsRemainder</BindingProperty>
+
+                <HeaderCaption>lblIsRemainder</HeaderCaption>
+
+            </GridColumn>
+
+            <GridColumn>
+
+                <BindingProperty>RoutingTransitNumber</BindingProperty>
+
+                <HeaderCaption>lblDDRoutingNumber</HeaderCaption>
+
+                <IsRequired>true</IsRequired>
+
+            </GridColumn>
+
+            <GridColumn>
+
+                <BindingProperty>BuildingSocietyNumber</BindingProperty>
+
+                <HeaderCaption>lblBuildingSocietyNumber</HeaderCaption>
+
+                <IsRequired>true</IsRequired>
+
+            </GridColumn>
+
+            <GridColumn>
+
+                <BindingProperty>DFPayMethodId</BindingProperty>
+
+                <HeaderCaption>lblPaymentMethod</HeaderCaption>
+
+                <DataProvider>PayMethods</DataProvider>
+
+                <DisplayMemberPath>ShortName</DisplayMemberPath>
+
+                <SelectedValuePath>DFPayMethodId</SelectedValuePath>
+
+                <IsRequired>true</IsRequired>
+
+            </GridColumn>
+
+            <GridColumn>
+
+                <BindingProperty>BankNumber</BindingProperty>
+
+                <HeaderCaption>lblDDInstitutionNumber</HeaderCaption>
+
+                <IsRequired>true</IsRequired>
+
+            </GridColumn>
+
+            <GridColumn>
+
+                <BindingProperty>AccountNumber</BindingProperty>
+
+                <HeaderCaption>lblAccountNumber</HeaderCaption>
+
+                <IsRequired>true</IsRequired>
+
+            </GridColumn>
+
+            <GridColumn>
+
+                <BindingProperty>DepositValue</BindingProperty>
+
+                <HeaderCaption>lblAmount</HeaderCaption>
+
+                <IsRequired>true</IsRequired>
+
+            </GridColumn>
+
+            <GridColumn>
+
+                <BindingProperty>IsPercentage</BindingProperty>
+
+                <HeaderCaption>lblIsPercentage</HeaderCaption>
+
+            </GridColumn>
+        </Grid>
+    </FormBody>
+</WF_DynamicForm>
